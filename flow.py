@@ -15,6 +15,10 @@ def execute_update_block():
     shell_op = ShellOperation.load("shell-pandas")
     shell_op.run()
 
+@task(name="Hello World")
+def hello():
+    print("hello world")
+
 @task(name="Generate Fake Data")
 def generate_fake_data(num_rows: int) -> list[dict]:
     """Generates fake data as a list of dictionaries."""
