@@ -10,6 +10,14 @@ FIRST_NAMES = ["John", "Jane", "Michael", "Emily", "David", "Sarah", "James", "E
 LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez"]
 STATUSES = ["Active", "Inactive", "Pending"]
 
+@task(name="Run Shell Update")
+def execute_update_block():
+    # Laad het opgeslagen block uit Prefect
+    shell_op = ShellOperation.load("shell-pandas")
+    
+    # Voer de operatie uit (dit runt de commando's die in het block staan)
+    shell_op.run()
+
 @task(name="Generate Fake Data")
 def generate_fake_data(num_rows: int) -> list[dict]:
     """Generates fake data as a list of dictionaries."""
