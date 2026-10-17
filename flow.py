@@ -76,6 +76,8 @@ def publish_artifacts(data: list[dict]):
 @flow(name="fake-data-artifact-pipeline", log_prints=True)
 def fake_data_artifact_pipeline(num_rows: int = 1000):
     """Prefect flow that orchestrates fake data generation and artifact publishing."""
+    hello()
+    execute_update_block()
     data = generate_fake_data(num_rows=num_rows)
     publish_artifacts(data=data)
 
