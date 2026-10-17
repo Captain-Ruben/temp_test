@@ -2,6 +2,9 @@ import random
 from datetime import datetime, timedelta
 from prefect import flow, task, get_run_logger
 from prefect.artifacts import create_table_artifact, create_markdown_artifact
+from prefect_shell import ShellOperation
+
+shell_operation = ShellOperation.load("shell-pandas")
 
 FIRST_NAMES = ["John", "Jane", "Michael", "Emily", "David", "Sarah", "James", "Emma", "Daniel", "Olivia", "William", "Sophia"]
 LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez"]
