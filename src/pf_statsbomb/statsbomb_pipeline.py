@@ -3,6 +3,7 @@ import logging
 import pandas as pd
 from sqlalchemy import create_engine
 from prefect import flow, task, get_run_logger
+from prefect.runner.storage import GitRepository
 from prefect.blocks.system import Secret
 from statsbombpy import sb
 
@@ -184,8 +185,11 @@ def statsbomb_pipeline(competition_id: int = 11, season_id: int = 22):
 
 if __name__ == "__main__":
     statsbomb_pipeline.from_source(
-        source=".",  # Vertelt Prefect dat de broncode lokaal staat
-        entrypoint="src/pf_statsbomb/statsbomb_pipeline.py:statsbomb_pipeline", # Vervang jouw_script_naam.py met de echte bestandsnaam
+        source=GitRepository(
+            url="https://github.com/Captain-Ruben/temp_test.git",
+            branch="master" 
+        ),
+        entrypoint="statsbomb_pipeline.py:statsbomb_pipeline",  # Vervang met de juiste bestandsnaam
     ).deploy(
         name="statsbomb-bronze-deployment",
         work_pool_name="default-process-pool",
